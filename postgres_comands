@@ -9,3 +9,4 @@ sudo passwd postgres
 sudo -i -u postgres
 psql
 \du
+sudo psql -U makis -d pstore_db -h 127.0.0.1 -W

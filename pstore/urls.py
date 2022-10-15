@@ -21,3 +21,7 @@ from django.urls import path
 urlpatterns = [
     path("psadmin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = "PStore GR Admin"
+admin.site.site_title = "PStore GR Admin Portal"
+admin.site.index_title = "Welcome to PStore GR Portal"

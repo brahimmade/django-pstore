@@ -5,6 +5,7 @@
 staticfiles
 mediafiles
 client/node_modules
+postgres_comands
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
