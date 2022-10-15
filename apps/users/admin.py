@@ -16,7 +16,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ['email', 'username', 'first_name', 'last_name', 'is_staff', 'is_active']
     fieldsets = (
         (
-            _("Login Creadentials"), {
+            _("Login Credentials"), {
                 "fields": ("email", "password",)
             },
         ),
