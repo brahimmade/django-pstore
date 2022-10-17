@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import logging
 import logging.config
 import os
+from datetime import timedelta
 from pathlib import Path
 
 import environ
@@ -66,8 +67,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "apps.blogs",
+    "apps.articles",
     "apps.common",
+    "apps.enquiries",
     "apps.profiles",
     "apps.ratings",
     "apps.users"
@@ -161,8 +163,6 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
-
-from datetime import timedelta
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": (
