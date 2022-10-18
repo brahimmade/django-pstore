@@ -61,7 +61,7 @@ class Article(TimeStampedUUIDModel):
     photo3 = models.ImageField(default="/interior_sample.png", null=True, blank=True)
     photo4 = models.ImageField(default="/interior_sample.png", null=True, blank=True)
     published_status = models.BooleanField(verbose_name=_("Published Status"), default=False)
-    views = models.ImageField(verbose_name=_("Total Views"), default=0)
+    views = models.IntegerField(verbose_name=_("Total Views"), default=0)
 
     objects = models.Manager()
     published = ArticlePublishedManager()
@@ -75,7 +75,7 @@ class Article(TimeStampedUUIDModel):
 
     def save(self, *args, **kwargs):
         self.title = str.title(self.title)
-        self.description = str.description(self.description)
+        self.description = str.capitalize(self.description)
         self.ref_code = "".join(
             random.choices(string.ascii_uppercase + string.digits, k=10)
         )
