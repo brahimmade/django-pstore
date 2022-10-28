@@ -7,43 +7,84 @@ from .models import User
 
 
 class UserAdmin(BaseUserAdmin):
-    ordering = ['email']
+    ordering = ["email"]
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = User
-    list_display = ['pkid', 'id', 'email', 'username', 'first_name', 'last_name', 'is_staff', 'is_active']
-    list_display_links = ['id', 'email']
-    list_filter = ['email', 'username', 'first_name', 'last_name', 'is_staff', 'is_active']
+    list_display = [
+        "pkid",
+        "id",
+        "email",
+        "username",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "is_active",
+    ]
+    list_display_links = ["id", "email"]
+    list_filter = [
+        "email",
+        "username",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "is_active",
+    ]
     fieldsets = (
         (
-            _("Login Credentials"), {
-                "fields": ("email", "password",)
-            },
-        ),
-        (
-          _("Personal Information"), {
-              "fields": ("username", "first_name", "last_name",)
-          },
-        ),
-        (
-            _("Permisions and Groups"), {
+            _("Login Credentials"),
+            {
                 "fields": (
-                    "is_active", "is_staff", "is_superuser", "groups", "user_permissions",
+                    "email",
+                    "password",
                 )
             },
         ),
         (
-            _("Importand Dates"), {
-                "fields": ("last_login", "date_joined",)
+            _("Personal Information"),
+            {
+                "fields": (
+                    "username",
+                    "first_name",
+                    "last_name",
+                )
             },
-        )
+        ),
+        (
+            _("Permisions and Groups"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                )
+            },
+        ),
+        (
+            _("Importand Dates"),
+            {
+                "fields": (
+                    "last_login",
+                    "date_joined",
+                )
+            },
+        ),
     )
 
     add_fieldsets = (
-        (None, {
+        None,
+        {
             "classes": ("wide",),
-            "fields": ("email", "password1", "password2", "is_staff", "is_active",),
-        })
+            "fields": (
+                "email",
+                "password1",
+                "password2",
+                "is_staff",
+                "is_active",
+            ),
+        },
     )
 
     search_fields = ["email", "username", "first_name", "last_name"]

@@ -36,7 +36,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             "photo4",
             "published_status",
             "views",
-            "final_article_title"
+            "final_article_title",
         ]
 
     def get_user(self, obj):

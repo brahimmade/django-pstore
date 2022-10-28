@@ -48,10 +48,10 @@ flake8:
 	docker-compose exec api flake8 .
 
 black-check:
-	docker-compose exec api black --check --exlude=migrations .
+	docker-compose exec api black --check --exclude=migrations .
 
 black-diff:
-	docker-compose exec api black --diff --exlude=migrations .
+	docker-compose exec api black --diff --exclude=migrations .
 
 black:
 	docker-compose exec api black --exclude=migrations .

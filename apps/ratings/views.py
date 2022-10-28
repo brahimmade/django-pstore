@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 from apps.profiles.models import Profile
+
 from .models import Rating
 
 # Create your views here.
@@ -11,7 +12,7 @@ from .models import Rating
 User = get_user_model()
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def create_author_review(request, profile_id):
     author_profile = Profile.objects.get(id=profile_id, is_author=True)
@@ -22,7 +23,9 @@ def create_author_review(request, profile_id):
         formatted_response = {"message": "you can't rate yourself"}
         return Response(formatted_response, status=status.HTTP_403_FORBIDDEN)
 
-    already_exists = author_profile.author_review.filter(author__pkid=profile_user.pkid).exists()
+    already_exists = author_profile.author_review.filter(
+        author__pkid=profile_user.pkid
+    ).exists()
     if already_exists:
         formatted_response = {"detail": "Profile already reviewed"}
         return Response(formatted_response, status=status.HTTP_400_BAD_REQUEST)
@@ -34,7 +37,7 @@ def create_author_review(request, profile_id):
             rater=request.user,
             author=author_profile,
             rating=data["rating"],
-            comment=data["comment"]
+            comment=data["comment"],
         )
 
         reviews = author_profile.author_review.all()

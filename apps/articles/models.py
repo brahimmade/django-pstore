@@ -39,28 +39,75 @@ class Article(TimeStampedUUIDModel):
         REVIEW_ARTICLE = "Review Article", _("Review Article")
         OTHER = "Other", _("Other")
 
-    user = models.ForeignKey(User, verbose_name=_("Author, Seller or Buyer"), related_name="author_buyer", on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(
+        User,
+        verbose_name=_("Author, Seller or Buyer"),
+        related_name="author_buyer",
+        on_delete=models.DO_NOTHING,
+    )
     title = models.CharField(verbose_name=_("Article Title"), max_length=250)
     slug = AutoSlugField(populate_from="title", unique=True, always_update=True)
-    ref_code = models.CharField(verbose_name=_("Article Reference Code"), max_length=255, unique=True, blank=True)
-    description = models.CharField(verbose_name=_("Description"), default="Default description...update me please....", max_length=255)
-    country = CountryField(verbose_name=_("Country"), default="GR", blank_label="(select country)")
-    article_number = models.IntegerField(verbose_name=_("Article Number"), validators=[MinValueValidator(1)], default=112)
-    price = models.DecimalField(verbose_name=_("Price"), max_digits=6, decimal_places=2, default=0.0)
-    tax = models.DecimalField(verbose_name=_("Article Tax"), max_digits=6, decimal_places=2, default=0.24, help_text="24% article tax charged")
+    ref_code = models.CharField(
+        verbose_name=_("Article Reference Code"),
+        max_length=255,
+        unique=True,
+        blank=True,
+    )
+    description = models.CharField(
+        verbose_name=_("Description"),
+        default="Default description...update me please....",
+        max_length=255,
+    )
+    country = CountryField(
+        verbose_name=_("Country"), default="GR", blank_label="(select country)"
+    )
+    article_number = models.IntegerField(
+        verbose_name=_("Article Number"), validators=[MinValueValidator(1)], default=112
+    )
+    price = models.DecimalField(
+        verbose_name=_("Price"), max_digits=6, decimal_places=2, default=0.0
+    )
+    tax = models.DecimalField(
+        verbose_name=_("Article Tax"),
+        max_digits=6,
+        decimal_places=2,
+        default=0.24,
+        help_text="24% article tax charged",
+    )
     words = models.IntegerField(verbose_name=_("Number of Words"), default=0)
-    total_words = models.IntegerField(verbose_name=_("Total Number of Words"), default=0)
+    total_words = models.IntegerField(
+        verbose_name=_("Total Number of Words"), default=0
+    )
     paragraphs = models.IntegerField(verbose_name=_("Paragraphs"), default=0)
     subtitles = models.IntegerField(verbose_name=_("Subtitles"), default=0)
-    keywords = models.IntegerField(verbose_name=_("Keywords"), blank=True, null=True, default=0)
-    advert_type = models.CharField(verbose_name=_("Advert Type"), max_length=50, choices=AdvertType.choices, default=AdvertType.FOR_SALE)
-    article_type = models.CharField(verbose_name=_("Article Type"), max_length=50, choices=ArticleType.choices, default=ArticleType.OTHER)
-    cover_photo = models.ImageField(verbose_name=_("Article Cover"), default="/article_sample.png", null=True, blank=True)
+    keywords = models.IntegerField(
+        verbose_name=_("Keywords"), blank=True, null=True, default=0
+    )
+    advert_type = models.CharField(
+        verbose_name=_("Advert Type"),
+        max_length=50,
+        choices=AdvertType.choices,
+        default=AdvertType.FOR_SALE,
+    )
+    article_type = models.CharField(
+        verbose_name=_("Article Type"),
+        max_length=50,
+        choices=ArticleType.choices,
+        default=ArticleType.OTHER,
+    )
+    cover_photo = models.ImageField(
+        verbose_name=_("Article Cover"),
+        default="/article_sample.png",
+        null=True,
+        blank=True,
+    )
     photo1 = models.ImageField(default="/interior_sample.png", null=True, blank=True)
     photo2 = models.ImageField(default="/interior_sample.png", null=True, blank=True)
     photo3 = models.ImageField(default="/interior_sample.png", null=True, blank=True)
     photo4 = models.ImageField(default="/interior_sample.png", null=True, blank=True)
-    published_status = models.BooleanField(verbose_name=_("Published Status"), default=False)
+    published_status = models.BooleanField(
+        verbose_name=_("Published Status"), default=False
+    )
     views = models.IntegerField(verbose_name=_("Total Views"), default=0)
 
     objects = models.Manager()
@@ -70,8 +117,8 @@ class Article(TimeStampedUUIDModel):
         return self.title
 
     class Meta:
-        verbose_name = 'Article'
-        verbose_name_plural = 'Articles'
+        verbose_name = "Article"
+        verbose_name_plural = "Articles"
 
     def save(self, *args, **kwargs):
         self.title = str.title(self.title)
@@ -93,7 +140,9 @@ class Article(TimeStampedUUIDModel):
 
 class ArticleViews(TimeStampedUUIDModel):
     ip = models.CharField(verbose_name=_("IP Address"), max_length=250)
-    article = models.ForeignKey(Article, related_name="article_views", on_delete=models.CASCADE)
+    article = models.ForeignKey(
+        Article, related_name="article_views", on_delete=models.CASCADE
+    )
 
     def __str__(self) -> str:
         return (
@@ -101,5 +150,5 @@ class ArticleViews(TimeStampedUUIDModel):
         )
 
     class Meta:
-        verbose_name = 'Total Views on Article'
-        verbose_name_plural = 'Total Articles Views'
+        verbose_name = "Total Views on Article"
+        verbose_name_plural = "Total Articles Views"
