@@ -1,5 +1,4 @@
 from django_countries.serializer_fields import CountryField
-from django_countries.serializers import CountryFieldMixin
 from rest_framework import serializers
 
 from .models import Article, ArticleViews
@@ -44,7 +43,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         return obj.user.username
 
 
-class ArticleCreateSerializer():
+class ArticleCreateSerializer(serializers.ModelSerializer):
     country = CountryField(name_only=True)
 
     class Meta:
