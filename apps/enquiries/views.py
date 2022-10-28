@@ -28,15 +28,8 @@ def send_enquiry_email(request):
             fail_silently=True,
         )
         enquiry = Enquiry(name=name, email=email, subject=subject, message=message)
-        print("Enquiry: ", enquiry)
         enquiry.save()
         return Response({"success": "Your Enquiry was successfully submited"})
-    # mail = EmailMessage(subject=subject, to=recipient_list, from_email=from_email, body=message)
-    # mail.send(fail_silently=True)
-    # enquiry = Enquiry(name=name, email=email, subject=subject, message=message)
-    # enquiry.save()
-    #     print("SUCCESS")
-    #     return Response({"success": "Your Enquiry was successfully submited"})
     except ValueError as e:
         print("FAIL", e)
         return Response({"fail": "Enquiry was not send. Please Try Again."})
